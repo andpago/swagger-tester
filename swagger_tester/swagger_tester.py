@@ -310,7 +310,7 @@ def swagger_test_yield(swagger_yaml_path=None, app_url=None, authorize_error=Non
                     continue
                 response = get_method_from_action(app_client, action)(url, headers=headers, data=body)
             else:
-                if app_url.endswith(swagger_parser.base_path):
+                if swagger_parser.base_path and app_url.endswith(swagger_parser.base_path):
                     base_url = app_url[:-len(swagger_parser.base_path)]
                 else:
                     base_url = app_url
