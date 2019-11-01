@@ -269,7 +269,10 @@ def swagger_test_yield(swagger_yaml_path=None, app_url=None, authorize_error=Non
         swagger_parser = SwaggerParser(swagger_yaml_path, use_example=use_example)
     elif app_url is not None:
         app_client = requests
-        remote_swagger_def = requests.get(u'{0}/swagger.json'.format(app_url), headers=extra_headers).json()
+        print(f"gettings swagger at {app_url}/swagger.json' with headers: {headers}")
+        resp = requests.get(u'{0}/swagger.json'.format(app_url), headers=extra_headers)
+        print("server resp:", resp)
+        remote_swagger_def = resp.json()
         swagger_parser = SwaggerParser(swagger_dict=remote_swagger_def, use_example=use_example)
     else:
         raise ValueError('You must either specify a swagger.yaml path or an app url')
